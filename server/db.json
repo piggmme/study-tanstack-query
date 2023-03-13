@@ -1,0 +1,14 @@
+{
+  "todos": [
+    {
+      "id": 1678699025275,
+      "content": "123",
+      "completed": false
+    },
+    {
+      "id": 1678699026891,
+      "content": "zzz",
+      "completed": true
+    }
+  ]
+}
