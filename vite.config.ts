@@ -12,6 +12,12 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
+      "/repos-api": {
+        target: "https://api.github.com/repos/tannerlinsley",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/repos-api/, ""),
+      },
     },
   },
 });

@@ -1,13 +1,13 @@
 {
   "todos": [
     {
-      "id": 1678699025275,
-      "content": "123",
+      "id": 1,
+      "content": "병원 가기",
       "completed": false
     },
     {
-      "id": 1678699026891,
-      "content": "zzz",
+      "id": 2,
+      "content": "운동 하기",
       "completed": true
     }
   ]

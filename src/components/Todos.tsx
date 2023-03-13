@@ -1,33 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useState } from "react";
-
-type Todo = {
-  id: number;
-  content: string;
-  completed: boolean;
-};
-
-const getTodos = () => axios.get<Todo[]>("/api/todos");
-const postTodo = ({ id, content, completed }: Todo) =>
-  axios.post<Todo[]>("/api/todos", {
-    id,
-    content,
-    completed,
-  });
-const completeTodo = ({ id, completed }: Omit<Todo, "content">) =>
-  axios.patch<Todo[]>(`/api/todos/${id}`, {
-    completed,
-  });
-const deleteTodo = ({ id }: Pick<Todo, "id">) =>
-  axios.delete<Todo[]>(`/api/todos/${id}`);
+import { completeTodo, deleteTodo, getTodos, postTodo } from "../api/todos";
 
 export default function Todos() {
   // Access the client
   const queryClient = useQueryClient();
 
   // Queries
-  const { data } = useQuery({ queryKey: ["todos"], queryFn: getTodos });
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
 
   // Mutations
   const postTodoMutation = useMutation({
@@ -41,7 +24,6 @@ export default function Todos() {
   const completeTodoMutation = useMutation({
     mutationFn: completeTodo,
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
@@ -49,15 +31,20 @@ export default function Todos() {
   const deleteTodoMutation = useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
   const [newTodo, setNewTodo] = useState("");
 
+  if (isLoading) return <>isLoading</>;
+
+  if (error) return <>{JSON.stringify(error)}</>;
+
   return (
-    <div>
+    <div
+      style={{ border: "5px solid tomato", margin: "10px", padding: "10px" }}
+    >
       <input
         type={"text"}
         placeholder="할 일을 입력하세요"
@@ -80,7 +67,7 @@ export default function Todos() {
       </button>
 
       <ul>
-        {data?.data?.map(({ id, content, completed }) => (
+        {data?.map(({ id, content, completed }) => (
           <li key={id}>
             <input
               type={"checkbox"}

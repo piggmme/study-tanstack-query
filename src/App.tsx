@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <RepoData /> */}
+      <RepoData />
       <Todos />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
