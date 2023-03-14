@@ -44,3 +44,33 @@ $ npm i @tanstack/react-query-devtools
 # or
 $ pnpm add @tanstack/react-query-devtools
 ```
+
+## 중요한 기본값
+
+> `useQuery`나 `useInfiniteQuery` 의 쿼리 인스턴스는 캐쉬된 데이터를 오래된(stale)데이터로 간주한다.
+
+`staleTime` 옵션을 사용해서 전역적으로 쿼리 구성 값을 변경할 수 있다. `staleTime`가 길수록 데이터를 자주 갱신하지 않는다는 의미이다.
+
+오래된(stale) 쿼리는 백그라운드에서 다음과 같은 상황에 자동적으로 새롭게 불러온다.
+
+- 쿼리 마운트의 새 인스턴스
+- 브라우저가 다시 포커스될 때
+- 네트워크가 다시 연결될 때
+- 쿼리는 refetch 주기를 가지고 새롭게 불러옴
+
+만약 프로그래밍 방식으로 refetch 하고싶다면 `refetchOnMount`, `refetchOnWindowFocus`, `refetchOnReconnect`, `refetchInterval`을 사용할 수도 있다.
+
+- `useQuery`, `useInfiniteQuery`로 생성된 인스턴스가 활성화되지 않는 쿼리와 쿼리 옵저버가 `inactive` 레이블로 지정되고 캐시에 남은 쿼리는 나중에 다시 사용된다.
+
+- `inactive` 쿼리는 가비지 컬렉터에 의해 5분뒤에 수거된다. 이 값을 수정하고 싶다면 `cacheTime` 값을 변경하면 된다.
+
+- 실패한 쿼리는 3번 재시도되며 UI에 오류를 표시하기 전에 backoff delay가 발생한다. 이를 변경하고 싶다면 `retry`와 `retryDelay`의 기본 값을 수정할 수 있다.
+
+- 쿼리 결과는 기본적으로 **구조적으로 공유되어 데이터가 실제로 변경되었는지 여부를 감지**하며, 만약 변경되지 않은 경우 `useMemo`, `useCallback`과 관련된 **값 안정화**에 더 도움이 되도록 데이터 참조는 변경되지 않는다. 이런 구조 공유는 JSON 호환 값에서만 작동하고 다른 값 유형은 항상 변경된 것으로 간주된다. `config.structureSharing` 으로 해당 기능을 변경할 수도 있다. `config.isDataEqual`로 데이터 비교 함수를 정의할 수도 있다.
+
+## TanStack Query 개념 정리
+
+> 1. [Queries](/docs/1_queries.md)
+> 2. [Query Keys](/docs/2_query_keys.md)
+> 3. [Query Functions](/docs/3_query_functions.md)
+> 4. [Network Mode](/docs/4_network_mode.md)
