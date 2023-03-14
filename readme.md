@@ -70,7 +70,11 @@ $ pnpm add @tanstack/react-query-devtools
 
 ## TanStack Query 개념 정리
 
-> 1. [Queries](/docs/1_queries.md)
-> 2. [Query Keys](/docs/2_query_keys.md)
-> 3. [Query Functions](/docs/3_query_functions.md)
-> 4. [Network Mode](/docs/4_network_mode.md)
+> 1. [Queries - 쿼리](/docs/1_queries.md)
+> 2. [Query Keys - 쿼리 키](/docs/2_query_keys.md)
+> 3. [Query Functions - 쿼리 함수](/docs/3_query_functions.md)
+> 4. [Network Mode - 네트워크 모드](/docs/4_network_mode.md)
+> 5. [Parallel Queries - 병렬 쿼리](/docs/5_parallel_aueries.md)
+> 6. [Dependent Queries - 종속 쿼리](/docs/6_dependent_queries.md)
+> 7. [Background Fetching Indicators](/docs/7_background_fetching_indicators.mds)
+> 8. [Disabling/Pausing Queries](/docs/8_disableing_pausing_queries.md)

@@ -1,5 +1,7 @@
 # Network Mode
 
+https://tanstack.com/query/latest/docs/react/guides/network-mode#network-mode-always
+
 TanStack Query는 네트워크에 연결되어 있지 않은 경우 Query와 Mutation이 어떻게 동작하는지를 구별하기 위해 **세 가지 다른 네트워크 모드**를 제공한다.
 이 모드는 각 Query, Mutation에 대해 개별적으로 설정하거나 Query, Mutation 기본값을 통해 전체적으로 설정할 수 있다.
 
